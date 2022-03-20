@@ -1,0 +1,90 @@
+
+<div class="center-div">
+   <button type="prev" class="btn">Home</button>
+</div>
+
+<div class="main">
+   <label id="q1label"> Which Boodoodoo can you do? </label>
+   <form #q1Form="ngForm" novalidate>
+      <div>
+         <input id="q1o1" type="radio" class="radio-button-1" value="option1" name="question1" ngModel required>
+         <label class="radio-label-in" for="option1">Option1</label>
+         <input id="q1o2" type="radio" class="radio-button-1" value="option2" name="question1" ngModel required>
+         <label class="radio-label-in" for="female">Option2</label>
+         <input id="q1o3" type="radio" class="radio-button-1" value="option3" name="question1" ngModel required>
+         <label class="radio-label-out" for="female">Option3</label>
+      </div>
+      <div *ngIf="isSubmitted && q1Form.invalid">
+         <p class="redred">Required: Please select a value</p>
+      </div>
+   </form>
+
+   <br><br>
+   <form #q2Form="ngForm">
+      <label id="q2label"> Which Blah blah can you do? </label>
+      <div>
+         <input id="q2o1" type="radio" class="radio-button-1" value="option1" name="question2" ngModel required>
+         <label class="radio-label-in" for="option1">Option1</label>
+         <input id="q2o2" type="radio" class="radio-button-1" value="option2" name="question2" ngModel required>
+         <label class="radio-label-in" for="female">Option2</label>
+         <input id="q2o3" type="radio" class="radio-button-1" value="option3" name="question2" ngModel required>
+         <label class="radio-label-out" for="female">Option3</label>
+      </div>
+      <div *ngIf="isSubmitted && q2Form.invalid">
+         <p class="redred">Required: Please select a value</p>
+      </div>
+   </form>
+
+   <br><br>
+   <form #q3Form="ngForm">
+      <label id="q3label"> Which Miimii can you do? </label>
+      <div>
+         <input id="q3o1" type="radio" class="radio-button-1" value="option1" name="question2" ngModel required>
+         <label class="radio-label-in" for="option1">Option1</label>
+         <input id="q3o2" type="radio" class="radio-button-1" value="option2" name="question2" ngModel required>
+         <label class="radio-label-in" for="female">Option2</label>
+         <input id="q3o3" type="radio" class="radio-button-1" value="option3" name="question2" ngModel required>
+         <label class="radio-label-out" for="female">Option3</label>
+      </div>
+      <div *ngIf="isSubmitted && q3Form.invalid">
+         <p class="redred">Required: Please select a value</p>
+      </div>
+   </form>
+
+   <br><br>
+   <form #q4Form="ngForm">
+      <label id="q4label"> Which Blah blah can you do? </label>
+      <div>
+         <input id="q4o1" type="radio" class="radio-button-1" value="option1" name="question2" ngModel required>
+         <label class="radio-label-in" for="option1">Option1</label>
+         <input id="q4o2" type="radio" class="radio-button-1" value="option2" name="question2" ngModel required>
+         <label class="radio-label-in" for="female">Option2</label>
+         <input id="q4o3" type="radio" class="radio-button-1" value="option3" name="question2" ngModel required>
+         <label class="radio-label-out" for="female">Option3</label>
+      </div>
+      <div *ngIf="isSubmitted && q4Form.invalid">
+         <p class="redred">Required: Please select a value</p>
+      </div>
+   </form>
+
+
+   <br><br>
+   <button type="submit" class="btn" (click)="submitForms([q1Form, q2Form, q3Form, q4Form]);">Submit Form</button>
+</div>
+
+
+
+
+<!-- <div [formGroup]="productFormGroup">
+<mat-radio-group *ngFor="let productItem of productList">
+   <label for="{{productItem.value}}" class="radio-inline">
+      <input id="{{productItem.value}}" 
+            [value]="productItem.value"
+            formControlName="productItem"                                          
+            type="radio"
+            name="requestType"
+            [checked]="productItem.value==='Sports'">
+            {{productItem.value}}
+   </label>
+</mat-radio-group>
+</div> -->
