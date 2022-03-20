@@ -31,7 +31,7 @@ public class Survey implements Serializable {
 
     @Override
     public String toString() {
-        StringBuilder myText = new StringBuilder(this.employee.toString());
+        StringBuilder myText = new StringBuilder(this.employee.toString()).append(" ");
         for (int response : this.responses) {
             myText.append(response).append(" ");
         }
