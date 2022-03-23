@@ -8,15 +8,19 @@ body {
   width: 85%;
   margin: 2rem auto;
   padding: 1rem;
-  text-align: center;
+  text-align: auto;
   box-shadow: 0 2px 4px 0 rgba(0,0,0,.2), 0 2.5rem 5rem 0 rgba(0,0,0,.1);
   background-color: rgb(223, 222, 222);
 }
-  
+
+.radio-div {
+  text-align: center; 
+  padding-top: 20px;
+}
+
   label {
-    font-size: 1rem;
-    font-weight: bold;
-    //display:block;
+    font-size: 20px;
+    text-align: left;
   }
 
   .ul-display {
@@ -24,11 +28,11 @@ body {
   }
 
   .radio-label-in {
-    padding-right: 1rem;
+    text-align: center;
   }
 
   .radio-label-out {
-    padding-right: 0rem;
+    padding-right: 0px;
   }
   
   .lg-text-input {
@@ -40,18 +44,6 @@ body {
     font-size: 1rem;
   }
   
-  .btn-wrapper {
-    margin-bottom: 2rem;
-  }
-  
-  .btn-menu {
-    flex-basis: 32%;
-  }
-  
-  .active {
-    color: green;
-  }
-  
   ul {
     padding-inline-start: 0;
   }
@@ -59,7 +51,16 @@ body {
    ul li {
       list-style: none;
   }
+ 
+  .button-submit:hover:enabled {
+    opacity: 0.75;
+    padding-right: 80px;
+    transition: 1s;
+  }
 
-  .redred {
-    color: rgb(192, 15, 15);
+  input[type="radio"] {
+    accent-color: #f4511e;
+    color: #f4511e;
+    width: 20px;
+    height: 20px;
   }

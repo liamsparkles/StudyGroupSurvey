@@ -55,7 +55,7 @@ public class SurveyService {
 
     public Float checkSurvey(String firstName, String lastName) {
         Survey mySurvey = surveyRepository.findByName(firstName, lastName).orElseThrow(() -> new RuntimeException(
-                String.format("Cannot find Survey with name %s", firstName, lastName)));
+                String.format("Cannot find Survey with name %s %s", firstName, lastName)));
         List<Question> myQuestions = questionService.getAllQuestions();
         SurveyResponse[] myResponses = mySurvey.getResponses();
 

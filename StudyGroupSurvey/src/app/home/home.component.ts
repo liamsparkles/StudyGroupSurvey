@@ -4,6 +4,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { YesNoDialogComponent } from '../Components/Shared/yes-no-dialog/yes-no-dialog.component';
 import { SurveyService } from '../survey.service';
 import { LocalSurveyService } from '../localsurvey.service';
+import { DynamicFormBuildConfig, DynamicFormConfiguration, RxDynamicFormBuilder } from '@rxweb/reactive-dynamic-forms';
+import { SERVER_DATA } from './server_data';
+import { ReactiveFormConfig } from '@rxweb/reactive-form-validators';
 
 @Component({
   selector: 'app-home',
@@ -12,27 +15,37 @@ import { LocalSurveyService } from '../localsurvey.service';
   providers: [ SurveyService ]
 })
 export class HomeComponent implements OnInit {
+
+  serverData: any[] = SERVER_DATA;
+
+  dynamicForm !: DynamicFormBuildConfig;
+  dynamicFormConfiguration !: DynamicFormConfiguration;
   
-  constructor(private route:Router, public dialog: MatDialog, private surveyService: SurveyService, private localSurveyService: LocalSurveyService) {}
-  firstname: string = "";
-  lastname: string = "";
+  constructor(private route:Router, 
+              public dialog: MatDialog, 
+              private surveyService: SurveyService, 
+              private localSurveyService: LocalSurveyService,
+              private dynamicFormBuilder:RxDynamicFormBuilder) {}
+  firstName: string = "";
+  lastName: string = "";
   validparameters: boolean = true;
   existingname: boolean = true;
 
+  uiBindings:string[] = ["firstName", "lastName"];
+
   async startSurvey() {
     //this.checkName(this.firstname, this.lastname);
-    if (this.firstname == "" || this.lastname == "") {
-      this.validparameters = false;
-    }
-    else {
-      this.validparameters = true;
-      await this.surveyService.getSurveyExistance(this.firstname, this.lastname)
+    if (this.dynamicForm.formGroup.valid) {
+      this.firstName = this.dynamicForm.formGroup.value.firstName;
+      this.lastName = this.dynamicForm.formGroup.value.lastName;
+      await this.surveyService.getSurveyExistance(this.firstName, this.lastName)
         .then(value => {this.existingname = value
         console.log("done")})
         .catch(error => console.log("Much error"))
     }
+    console.log(this.existingname);
 
-    if (this.existingname && this.validparameters) {
+    if (this.existingname && this.dynamicForm.formGroup.valid) {
       const dialogRef = this.dialog.open(YesNoDialogComponent, {
       maxWidth: "400px",
       data: {
@@ -42,16 +55,15 @@ export class HomeComponent implements OnInit {
       // listen to response
       dialogRef.afterClosed().subscribe(dialogResult => { 
         if (dialogResult) {
-          this.localSurveyService.updateNames(this.firstname, this.lastname);
+          this.localSurveyService.updateNames(this.firstName, this.lastName);
           this.route.navigate(['results']);
         }
       })
     }
-    else if (this.validparameters && !this.existingname) {
-      this.localSurveyService.updateNames(this.firstname, this.lastname);
+    else if (this.dynamicForm.formGroup.valid && !this.existingname) {
+      this.localSurveyService.updateNames(this.firstName, this.lastName);
       this.route.navigate(['survey']);
     }
-    console.log(this.existingname);
   }
 
   checkName(firstname: string, lastname: string) {
@@ -69,6 +81,12 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    ReactiveFormConfig.set({
+      validationMessage:{
+        required:"This field is required"
+      }
+    })
+    this.dynamicForm = this.dynamicFormBuilder.formGroup(this.serverData);
   }
 
 }

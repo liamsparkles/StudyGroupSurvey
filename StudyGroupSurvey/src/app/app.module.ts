@@ -14,6 +14,8 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { SurveyComponent } from './survey/survey.component';
 import { ResultsComponent } from './results/results.component';
+import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
+import { RxReactiveDynamicFormsModule } from '@rxweb/reactive-dynamic-forms';
 
 @NgModule({
   declarations: [
@@ -26,13 +28,15 @@ import { ResultsComponent } from './results/results.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule,
     MatRadioModule,
+    FormsModule,
     ReactiveFormsModule,
+    RxReactiveFormsModule,
+    RxReactiveDynamicFormsModule,
     MatDialogModule,
     MatCardModule,
     BrowserAnimationsModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

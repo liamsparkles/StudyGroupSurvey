@@ -46,7 +46,7 @@ public class SurveyManagerApplication implements CommandLineRunner {
 
 	public void create1Question() {
 		System.out.println("Testing question creation");
-		questionRepo.save(new Question(1,
+		questionRepo.save(new Question(0,
 				"What's the annotation to make a simple class of data in python?",
 				new QuestionResponse[]{
 						new QuestionResponse(0, "@Classdata"),
@@ -55,6 +55,24 @@ public class SurveyManagerApplication implements CommandLineRunner {
 						new QuestionResponse(3, "@DataClass"),
 						new QuestionResponse(4, "@ClassData")},
 		2));
+		questionRepo.save(new Question(1,
+				"What's the difference between list and a tuple?",
+				new QuestionResponse[]{
+						new QuestionResponse(0, "in operator"),
+						new QuestionResponse(1, "mutability"),
+						new QuestionResponse(2, "indexing"),
+						new QuestionResponse(3, "size"),
+						new QuestionResponse(4, "speed")},
+				1));
+		questionRepo.save(new Question(2,
+				"Denotion for private methods in python?",
+				new QuestionResponse[]{
+						new QuestionResponse(0, "my_func__"),
+						new QuestionResponse(1, "my_func_"),
+						new QuestionResponse(2, "#my_func"),
+						new QuestionResponse(3, "_my_func"),
+						new QuestionResponse(4, "my_func#")},
+				3));
 	}
 
 	public void create1Survey() {

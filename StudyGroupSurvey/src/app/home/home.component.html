@@ -1,16 +1,11 @@
 <div class="main">
-    <form #startForm="ngForm">
-        <p>Home Group Survey</p>
-        <label for="firstname" value="">First name:</label>
-        <input id="firstname" type="text" name="firstname" [(ngModel)]="firstname" ngModel required>
-        <br>
-        <label for="lastname" value="">Last name:</label>
-        <input id="lastname" type="text" name="lastname" [(ngModel)]="lastname" ngModel required>
-        <br>
-
-        <div *ngIf="!validparameters">
-            <p>Please enter a first and last name.</p>
-        </div>
-        <button type="start" (click)="startSurvey();">Start Survey</button>
-    </form>
+    <div class="main-vert">
+        <form [formGroup]="dynamicForm.formGroup">
+            <div viewMode="basic" [rxwebDynamicForm]="dynamicForm" [uiBindings]="uiBindings"></div>
+            <br>
+            <button [disabled]="!dynamicForm.formGroup.valid" type="submit" class="button" style="vertical-align:middle" (click)="startSurvey()">
+                <span> Start Survey</span>
+            </button>
+        </form>
+    </div>
 </div>

@@ -1,12 +1,12 @@
-<mat-card fxLayoutGap>
+<mat-card class="bkg-color" fxLayoutGap>
 
-    <p mat-dialog-title>{{data.title}}</p>
+    <p class="text-middle" mat-dialog-title>{{data.title}}</p>
 
-    <p display-2>{{data.message}}</p>
+    <p class="text-middle" display-2>{{data.message}}</p>
 
 
     <div mat-dialog-actions>
-        <button mat-button (click)="onDismiss()">No</button>
-        <button mat-raised-button color="primary" (click)="onConfirm()">Yes</button>
+        <button class="button" mat-button (click)="onDismiss()">No</button>
+        <button class="button" mat-raised-button color="primary" (click)="onConfirm()">Yes</button>
     </div>
 </mat-card>
