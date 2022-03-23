@@ -1,6 +1,7 @@
 package com.groupsurvey.surveymanager.model;
 
 public class SurveyResponse {
+    // A response for a question
     private int qId; // id for the question
     private int rId; // id for the response
 

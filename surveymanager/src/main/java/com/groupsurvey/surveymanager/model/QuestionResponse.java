@@ -1,8 +1,9 @@
 package com.groupsurvey.surveymanager.model;
 
 public class QuestionResponse {
-    private int rId;
-    private String rText;
+    // Stores a question response
+    private int rId; // id for the response (allows for easier random ordering of responses)
+    private String rText; // text for the response
 
     public QuestionResponse(int rId, String rText) {
         this.rId = rId;

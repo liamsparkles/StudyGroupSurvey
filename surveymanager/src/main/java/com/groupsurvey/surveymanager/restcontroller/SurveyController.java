@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/survey")
 public class SurveyController {
+    //Controller to handle requests to the survey database
 
     private final SurveyService surveyService;
 

@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog'
 
 export interface DialogData {
@@ -12,7 +12,7 @@ export interface DialogData {
   templateUrl: './yes-no-dialog.component.html',
   styleUrls: ['./yes-no-dialog.component.scss']
 })
-export class YesNoDialogComponent implements OnInit {
+export class YesNoDialogComponent {
   dialogData: DialogData = {'title':"", 'message':""};
   title: string = "";
   message: string = "";
@@ -21,9 +21,6 @@ export class YesNoDialogComponent implements OnInit {
     public dialogRef: MatDialogRef<YesNoDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData
   ) { }
-
-  ngOnInit(): void {
-  }
 
   onConfirm(): void {
     this.dialogRef.close(true);

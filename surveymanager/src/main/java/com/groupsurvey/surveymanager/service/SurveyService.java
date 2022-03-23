@@ -11,6 +11,7 @@ import java.util.Optional;
 
 @Service
 public class SurveyService {
+    //Service for the survey database
 
     private final SurveyRepository surveyRepository;
     private final QuestionService questionService;
@@ -54,6 +55,8 @@ public class SurveyService {
     }
 
     public Float checkSurvey(String firstName, String lastName) {
+        // Finds the survey using the passed name, then calculates the amount of correct questions against the
+        // question database.
         Survey mySurvey = surveyRepository.findByName(firstName, lastName).orElseThrow(() -> new RuntimeException(
                 String.format("Cannot find Survey with name %s %s", firstName, lastName)));
         List<Question> myQuestions = questionService.getAllQuestions();

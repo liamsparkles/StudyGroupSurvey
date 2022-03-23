@@ -19,14 +19,10 @@ export class ResultsComponent implements OnInit {
   constructor(private localSurveyService: LocalSurveyService, private surveyService: SurveyService, private questionService: QuestionService) { }
 
   ngOnInit() {
-    this.questionService.getQuestions().subscribe( {
-      next: (q: Question[]) => this.questions = q,
-      error: (e) => alert(e.message),
-      complete: () => console.log("Completed Question Load"),
-      });
-
-    this.firstName = this.localSurveyService.getFirstName();
-    this.lastName = this.localSurveyService.getLastName();
+    // Load the user's name and check their survey results, store the result in 'score'
+    this.firstName = localStorage.getItem("firstName") || "";
+    this.lastName = localStorage.getItem("lastName") || "";
+    this.localSurveyService.updateNames(this.firstName, this.lastName);
     this.surveyService.checkSurvey(this.firstName, this.lastName)
         .then(value => {this.score = Math.ceil(value * 100);
         console.log("done")})

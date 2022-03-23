@@ -8,6 +8,7 @@ import java.util.List;
 
 @Service
 public class QuestionService {
+    //Service for the question database
 
     private final QuestionRepository questionRepository;
 
@@ -20,6 +21,7 @@ public class QuestionService {
     }
 
     public void updateQuestion(Question question) {
+        //Find the question, then make the necessary changes
         Question changeQuestion = questionRepository.findById(Integer.toString(question.getQuestionId()))
                 .orElseThrow(() -> new RuntimeException(
                         String.format("Cannot Find Question with Id %s", question.getQuestionId())));

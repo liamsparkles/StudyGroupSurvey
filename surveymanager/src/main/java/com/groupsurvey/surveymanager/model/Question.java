@@ -5,9 +5,9 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-//@Entity
 @Document
 public class Question {
+    // Stores a question, including the question prompt/text, possible responses, and the true answer
     @Id
     @Field(name = "_id")
     private int questionId;
@@ -70,48 +70,3 @@ public class Question {
         return myText.toString();
     }
 }
-
-//class Questions{
-//    private ArrayList<Question> questions;
-//
-//    public Questions(ArrayList<Question> qs) {
-//        this.questions = qs;
-//    }
-//
-//    public ArrayList<Question> getQuestions() {
-//        return this.questions;
-//    }
-//
-//    public void setQuestions(ArrayList<Question> qs) {
-//        this.questions = qs;
-//    }
-//
-//    public void addQuestion(Question q) {
-//        this.questions.add(q);
-//    }
-//
-//    public void deleteQuestion(int id) {
-//        this.questions.remove(id);
-//    }
-//
-//    public String getQuestionResponse(int iQuestion, String response) {
-//        return this.questions.get(iQuestion).getResponse(response);
-//    }
-//
-//    public String[] surveyToResponses(Survey survey) {
-//        String[] responses = new String[survey.getResponses().length];
-//        for (int i = 0; i < survey.getResponses().length; i++) {
-//            responses[i] = this.getQuestionResponse(i, survey.getResponses()[i]);
-//        }
-//        return responses;
-//    }
-//
-//    @Override
-//    public String toString() {
-//        StringBuilder myText = new StringBuilder();
-//        for (Question que : this.questions) {
-//            myText.append(que.toString()).append("\n");
-//        }
-//        return myText.toString();
-//    }
-//}

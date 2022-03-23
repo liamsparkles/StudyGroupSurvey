@@ -11,6 +11,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/question")
 public class QuestionController {
+    //Controller to handle requests to the question database
 
     private final QuestionService questionService;
 

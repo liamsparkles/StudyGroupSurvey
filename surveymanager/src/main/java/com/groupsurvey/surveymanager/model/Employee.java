@@ -1,6 +1,7 @@
 package com.groupsurvey.surveymanager.model;
 
 public class Employee {
+    // Stores data for the user's/employee name, used as the key to access the survey results
     private String firstName;
     private String lastName;
 

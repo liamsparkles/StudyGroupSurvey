@@ -14,8 +14,9 @@ body {
 }
 
 .radio-div {
-  text-align: center; 
+  text-align: left; 
   padding-top: 20px;
+  padding-left: 40px;
 }
 
   label {
@@ -24,11 +25,11 @@ body {
   }
 
   .ul-display {
-    display: inline;
+    display:block;
   }
 
   .radio-label-in {
-    text-align: center;
+    text-align: left;
   }
 
   .radio-label-out {

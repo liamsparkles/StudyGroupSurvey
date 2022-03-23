@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LocalSurveyService } from '../localsurvey.service';
@@ -23,12 +23,8 @@ export class SurveyComponent implements OnInit{
               private questionService: QuestionService) {
   }
 
-  // @HostListener("window:beforeunload", ["$event"]) unloadHandler(event: Event) {
-  //   console.log("Processing beforeunload..."), 
-  //   localStoddrage.setItem("firstName", this.localSurveyService.getFirstName()),
-  //   localStorage.setItem("loadName", this.localSurveyService.getLastName());
-  // } 
   async submitResponses(form: NgForm) {
+    // Save the survey response from the user
     if (form.valid) {
       await this.surveyService.addSurvey(this.localSurveyService.getSurvey())
         .then(q => {
@@ -44,29 +40,23 @@ export class SurveyComponent implements OnInit{
   }
 
   submitRadio(qId: number, rId: number, rText: string){
+    // Save the response into local storage
     console.log(rText);
     this.localSurveyService.addResult(qId, rId);
   }
 
-  printLocalDB(){
-    let fName = this.localSurveyService.getFirstName();
-    let lName = this.localSurveyService.getLastName();
-    console.log(fName);
-    console.log(lName);
-  }
-
   ngOnInit() {
+    // Get the questions from the DB
     this.questionService.getQuestions().subscribe( {
       next: (q: Question[]) => this.questions = q,
       error: (e) => alert(e.message),
       complete: () => console.log("Completed Question Load"),
       });
 
+    // Load names (our ids) and save them into our local service in case we reloaded the page.
     let firstName: string = localStorage.getItem("firstName") || "";
     let lastName: string = localStorage.getItem("lastName") || "";
     this.localSurveyService.updateNames(firstName, lastName);
-    this.printLocalDB();
   }
-
 
 }

@@ -28,48 +28,49 @@ export class HomeComponent implements OnInit {
               private dynamicFormBuilder:RxDynamicFormBuilder) {}
   firstName: string = "";
   lastName: string = "";
-  validparameters: boolean = true;
-  existingname: boolean = true;
-
-  uiBindings:string[] = ["firstName", "lastName"];
+  existingname: boolean = true; // whether the name exists
+  uiBindings:string[] = ["firstName", "lastName"]; // for the dynamic form
 
   async startSurvey() {
-    //this.checkName(this.firstname, this.lastname);
-    if (this.dynamicForm.formGroup.valid) {
+    if (this.dynamicForm.formGroup.valid) { 
+      // if form is valid, check if the name is in the DB
       this.firstName = this.dynamicForm.formGroup.value.firstName;
       this.lastName = this.dynamicForm.formGroup.value.lastName;
-      await this.surveyService.getSurveyExistance(this.firstName, this.lastName)
+      await this.surveyService.getSurveyExistance(this.firstName.toLowerCase(), this.lastName.toLowerCase())
         .then(value => {
           this.existingname = value
-          console.log("done")
+          console.log("Response received")
         })
-        .catch(error => console.log("Much error"))
+        .catch(error => console.log("An error occurred"))
     }
-    console.log(this.existingname);
 
-    if (this.existingname && this.dynamicForm.formGroup.valid) {
+    if (this.existingname && this.dynamicForm.formGroup.valid) { 
+      // If the user's name exists, prompt user to check their results
       const dialogRef = this.dialog.open(YesNoDialogComponent, {
       maxWidth: "400px",
       data: {
         title: "Survey Already Completed",
         message: "Do you want to see your results?"}
       });
-      // listen to response
+      // act on the response
       dialogRef.afterClosed().subscribe(dialogResult => { 
-        if (dialogResult) {
-          this.localSurveyService.updateNames(this.firstName, this.lastName);
+        if (dialogResult) { // They said yes, go to results, persist the user's name 
+          localStorage.setItem("firstName", this.firstName.toLowerCase());
+          localStorage.setItem("lastName", this.lastName.toLowerCase());
           this.route.navigate(['results']);
         }
       })
     }
     else if (this.dynamicForm.formGroup.valid && !this.existingname) {
-      localStorage.setItem("firstName", this.firstName);
-      localStorage.setItem("lastName", this.lastName);
+      // If the user's name does not exist, give them the survey/quiz
+      localStorage.setItem("firstName", this.firstName.toLowerCase());
+      localStorage.setItem("lastName", this.lastName.toLowerCase());
       this.route.navigate(['survey']);
     }
   }
 
   ngOnInit(): void {
+    // Create the form and set the validation message.
     ReactiveFormConfig.set({
       validationMessage:{
         required:"This field is required"

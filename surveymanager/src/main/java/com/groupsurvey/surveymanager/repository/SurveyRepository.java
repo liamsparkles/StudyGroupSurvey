@@ -7,13 +7,11 @@ import org.springframework.data.mongodb.repository.Query;
 import java.util.Optional;
 
 public interface SurveyRepository extends MongoRepository<Survey, String> {
+    // Repository for the survey
 
     @Query("{'_id.firstName': '?0', '_id.lastName': '?1'}")
-    Optional<Survey> findByName(String firstName, String lastName);
+    Optional<Survey> findByName(String firstName, String lastName); // for finding a survey using the employee's name
 
     @Query("{'_id.firstName': '?0', '_id.lastName': '?1'}")
-    boolean existsByFirstNameAndLastName(String firstName, String lastName);
-
-    @Query("{'_id.firstName': '?0', '_id.lastName': '?1'}")
-    void deleteByName(String firstName, String lastName);
+    void deleteByName(String firstName, String lastName); // for deleting a survey using the employee's name
 }

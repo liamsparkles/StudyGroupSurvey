@@ -3,10 +3,9 @@ package com.groupsurvey.surveymanager.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.io.Serializable;
-
 @Document
-public class Survey implements Serializable {
+public class Survey {
+    // Stores the name and responses/answers for an employee
     @Id
     private Employee employee;
     private SurveyResponse[] surveyResponses;
