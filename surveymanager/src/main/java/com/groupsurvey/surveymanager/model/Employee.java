@@ -1,8 +1,6 @@
 package com.groupsurvey.surveymanager.model;
 
-import java.io.Serializable;
-
-public class Employee implements Serializable {
+public class Employee {
     private String firstName;
     private String lastName;
 

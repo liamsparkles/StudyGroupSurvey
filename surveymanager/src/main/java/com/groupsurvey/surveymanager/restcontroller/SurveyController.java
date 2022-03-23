@@ -37,9 +37,12 @@ public class SurveyController {
 
     @GetMapping("/{firstName}/{lastName}")
     public ResponseEntity<Survey> getSurveyByName(@PathVariable String firstName, @PathVariable String lastName) {
-        System.out.println(firstName);
-        System.out.println(lastName);
         return ResponseEntity.ok(surveyService.getSurveyByName(firstName, lastName));
+    }
+
+    @GetMapping("/exists/{firstName}/{lastName}")
+    public ResponseEntity<Boolean> getSurveyExistance(@PathVariable String firstName, @PathVariable String lastName) {
+        return ResponseEntity.ok(surveyService.getSurveyExistance(firstName, lastName));
     }
 
     @DeleteMapping("/{firstName}/{lastName}")

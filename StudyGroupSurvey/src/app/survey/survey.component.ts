@@ -1,59 +1,70 @@
+import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, FormArray, NgForm, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { LocalSurveyService } from '../localsurvey.service';
+import { Question } from '../question';
+import { QuestionService } from '../question.service';
+import { Survey } from '../survey';
+import { SurveyService } from '../survey.service';
 
 @Component({
   selector: 'app-survey',
   templateUrl: './survey.component.html',
-  styleUrls: ['./survey.component.scss']
+  styleUrls: ['./survey.component.scss'],
 })
-export class SurveyComponent{
+export class SurveyComponent implements OnInit{
   isSubmitted = false;
+  public questions: Question[] = [];
+  private tempSurvey: Survey = new Survey("", "", []);
 
   productFormGroup!: FormGroup;
-  constructor(public formBuilder: FormBuilder) {
+  constructor(private route:Router, public formBuilder: FormBuilder, private localSurveyService: LocalSurveyService, private surveyService: SurveyService, private questionService: QuestionService) {
   }
   
-  /*########### Template Driven Form ###########*/
-  submitForms(forms: NgForm[]) {
-    let areFormsGood: Boolean = true;
-    for (let i = 0; i < forms.length; i++) {
-      areFormsGood = areFormsGood && this.submitForm(forms[i]);
+  submitResponses(form: NgForm) {
+    if (form.valid) {
+      //TODO Check for null first/last name, how to fix that?
+      this.pushToServer();
+      console.log("Pushed");
+      this.route.navigate(['results']);
     }
-    if (areFormsGood) {
-      alert("Horray!");
+    else {
+      console.log("The form is not valid");
     }
   }
 
-  submitForm(form: NgForm) {
-    this.isSubmitted = true;
-    if(!form.valid) {
-      return false;
-    } 
-    //alert(JSON.stringify(form.value))
-    return true;
+  submitRadio(qId: number, rId: number, rText: string){
+    console.log(rText);
+    this.localSurveyService.addResult(qId, rId);
   }
 
-  // productList = [
-  //   {value: "q1"},
-  //   {value: "q2"},
-  //   {value: "q3"}
-  // ];
+  printLocalDB(){
+    let fName = this.localSurveyService.getFirstName();
+    let lName = this.localSurveyService.getLastName();
+    console.log(fName);
+    console.log(lName);
+  }
 
+  pushToServer() {
+    this.surveyService.addSurvey(this.localSurveyService.getSurvey()).subscribe( {
+      next: (q => console.log(q)),
+      error: (e) => alert(e.message)
+    });
+  }
 
-  // ngOnInit() {
-  //   this.productFormGroup = this.formBuilder.group({
-  //     productItem: ['', Validators.required],
-  //   });
-  //   //const productsMethodsControl = <FormArray>this.productFormGroup.controls['productMethods'];
-  //   // creating radio button control for each item.
-  //   //for (let i = 0, length = this.productList.length; i < length; i++) {
-  //   //  productsMethodsControl.push(new FormControl(false));
-  //   //}
-  // }
+  ngOnInit() {
+    this.questionService.getQuestions().subscribe( {
+      next: (q: Question[]) => this.questions = q,
+      error: (e) => alert(e.message),
+      complete: () => console.log("Completed Question Load"),
+      });
 
-  // onSubmit() {
-  //   console.log(this.productFormGroup);
-  // }
+    this.surveyService.getSurvey("Liam", "Sparling").subscribe( {
+      next: (q => this.tempSurvey = q),
+      error: (e) => alert(e.message)
+    });
+  }
 
 
 }

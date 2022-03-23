@@ -2,7 +2,7 @@
    <button type="home" class="btn" [routerLink]="['']">Home</button>
 </div>
 
-<div class="main">
+<!-- <div class="main">
    <label id="q1label"> Which Boodoodoo can you do? </label>
    <form #q1Form="ngForm" novalidate>
       <div>
@@ -70,11 +70,40 @@
    <br><br>
    <button type="submit" class="btn" (click)="submitForms([q1Form, q2Form, q3Form, q4Form]);">Submit Form</button>
 </div>
+ -->
 
-
-
+<div class="main">
+   <form #qForm="ngForm" (ngSubmit)="submitResponses(qForm)">
+      <ul>
+         <li *ngFor="let question of questions">
+            <label class="radio-label-out">{{question.questionText}}</label>
+            <br>
+            <ul class="ul-display" *ngFor="let response of question.responses">
+               <input 
+                  type="radio" 
+                  value="{{response.rText}}" 
+                  name="{{question.questionId}}" 
+                  id="{{question.questionId}}{{response.rId}}" 
+                  (ngModelChange)="submitRadio(question.questionId, response.rId, response.rText)" 
+                  ngModel required>
+               <label 
+                  class="radio-label-in" 
+                  for="{{question.questionId}}{{response.rId}}"> 
+                  {{response.rText}} 
+               </label>
+            </ul>
+            <div *ngIf="isSubmitted && qForm.invalid">
+               <p class="redred">Required: Please select a value</p>
+            </div>
+            <br><br>
+         </li>
+      </ul>
+      <p><input type="submit" class="btn" value="Submit Form"></p>
+   </form>
+</div>
 
 <!-- <div [formGroup]="productFormGroup">
+
 <mat-radio-group *ngFor="let productItem of productList">
    <label for="{{productItem.value}}" class="radio-inline">
       <input id="{{productItem.value}}" 

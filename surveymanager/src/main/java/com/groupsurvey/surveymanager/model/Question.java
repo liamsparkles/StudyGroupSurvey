@@ -5,10 +5,6 @@ import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.List;
-
 //@Entity
 @Document
 public class Question {
@@ -18,10 +14,10 @@ public class Question {
     @Field(name = "text")
     @Indexed(unique = true)
     private String questionText;
-    private String[] responses;
-    private String answer;
+    private QuestionResponse[] responses;
+    private int answer;
 
-    public Question(int questionId, String questionText, String[] responses, String answer) {
+    public Question(int questionId, String questionText, QuestionResponse[] responses, int answer) {
         this.questionId = questionId;
         this.questionText = questionText;
         this.responses = responses;
@@ -44,32 +40,32 @@ public class Question {
         this.questionText = questionText;
     }
 
-    public String[] getResponses() {
+    public QuestionResponse[] getResponses() {
         return this.responses;
     }
 
-    public void setResponses(String[] responses) {
+    public void setResponses(QuestionResponse[] responses) {
         this.responses = responses;
     }
 
-    public String getAnswer() {
+    public int getAnswer() {
        return this.answer;
     }
 
-    public void setAnswer(String answer) {
+    public void setAnswer(int answer) {
         this.answer = answer;
     }
 
-    public boolean isCorrect(String response) {
-        return this.answer.equals(response);
+    public boolean isCorrect(SurveyResponse surveyResponse) {
+        return surveyResponse.getrId() == this.answer;
     }
 
     @Override
     public String toString() {
         StringBuilder myText = new StringBuilder(this.questionId).append(" ").append(this.questionText);
         myText.append("\n");
-        for (String resp : this.responses) {
-            myText.append(resp).append("\n");
+        for (QuestionResponse resp : this.responses) {
+            myText.append(resp.toString()).append("\n");
         }
         return myText.toString();
     }

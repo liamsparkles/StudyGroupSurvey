@@ -12,5 +12,8 @@ public interface SurveyRepository extends MongoRepository<Survey, String> {
     Optional<Survey> findByName(String firstName, String lastName);
 
     @Query("{'_id.firstName': '?0', '_id.lastName': '?1'}")
+    boolean existsByFirstNameAndLastName(String firstName, String lastName);
+
+    @Query("{'_id.firstName': '?0', '_id.lastName': '?1'}")
     void deleteByName(String firstName, String lastName);
 }

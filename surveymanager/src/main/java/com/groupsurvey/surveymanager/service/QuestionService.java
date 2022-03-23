@@ -37,7 +37,7 @@ public class QuestionService {
 
     public Question getQuestionById(String id) {
         return questionRepository.findById(Integer.parseInt(id)).orElseThrow(() -> new RuntimeException(
-                String.format("Cannot find question with the text: %s", id)));
+                String.format("Cannot find question with the id: %d", id)));
     }
 
     public void deleteQuestion(int id) {

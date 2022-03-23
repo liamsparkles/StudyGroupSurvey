@@ -2,7 +2,6 @@ package com.groupsurvey.surveymanager.model;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
 
 import java.io.Serializable;
 
@@ -10,35 +9,35 @@ import java.io.Serializable;
 public class Survey implements Serializable {
     @Id
     private Employee employee;
-    private String[] responses;
+    private SurveyResponse[] surveyResponses;
 
     public Survey() {};
 
-    public Survey(Employee employee, String[] responses){
+    public Survey(Employee employee, SurveyResponse[] surveyResponses) {
         this.employee = employee;
-        this.responses = responses;
-    }
-
-    public String[] getResponses() {
-        return this.responses;
-    }
-
-    public void setResponses(String[] responses) {
-        this.responses = responses;
+        this.surveyResponses = surveyResponses;
     }
 
     public Employee getEmployee() {
-        return this.employee;
+        return employee;
     }
 
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
 
+    public SurveyResponse[] getResponses() {
+        return surveyResponses;
+    }
+
+    public void setResponses(SurveyResponse[] surveyResponses) {
+        this.surveyResponses = surveyResponses;
+    }
+
     @Override
     public String toString() {
         StringBuilder myText = new StringBuilder(this.employee.toString()).append(" ");
-        for (String response : this.responses) {
+        for (SurveyResponse response : this.surveyResponses) {
             myText.append(response).append(" ");
         }
         return myText.toString();

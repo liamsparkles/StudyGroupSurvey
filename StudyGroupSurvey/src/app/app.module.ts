@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { YesNoDialogComponent } from './Components/Shared/yes-no-dialog/yes-no-dialog.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -30,7 +31,8 @@ import { ResultsComponent } from './results/results.component';
     ReactiveFormsModule,
     MatDialogModule,
     MatCardModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent],
