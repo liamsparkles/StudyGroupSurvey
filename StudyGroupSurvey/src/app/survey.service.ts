@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { lastValueFrom, Observable} from 'rxjs';
+import { firstValueFrom, lastValueFrom, Observable} from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Survey } from './survey';
 
@@ -24,8 +24,8 @@ export class SurveyService {
     return lastValueFrom(this.http.get<boolean>(`${this.apiServerUrl}/exists/${firstName}/${lastName}`));
   }
 
-  public addSurvey(survey: Survey): Observable<void> {
-    return this.http.post<void>(`${this.apiServerUrl}`, survey);
+  public addSurvey(survey: Survey): Promise<void> {
+    return firstValueFrom(this.http.post<void>(`${this.apiServerUrl}`, survey));
   }
 
   public checkSurvey(firstName: string, lastName: string): Promise<number> {

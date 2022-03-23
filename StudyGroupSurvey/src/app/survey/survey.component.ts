@@ -1,11 +1,9 @@
-import { ThisReceiver } from '@angular/compiler';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl, FormArray, NgForm, Validators } from '@angular/forms';
+import { Component, HostListener, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LocalSurveyService } from '../localsurvey.service';
 import { Question } from '../question';
 import { QuestionService } from '../question.service';
-import { Survey } from '../survey';
 import { SurveyService } from '../survey.service';
 
 @Component({
@@ -16,17 +14,28 @@ import { SurveyService } from '../survey.service';
 export class SurveyComponent implements OnInit{
   isSubmitted = false;
   public questions: Question[] = [];
-  private tempSurvey: Survey = new Survey("", "", []);
 
   productFormGroup!: FormGroup;
-  constructor(private route:Router, public formBuilder: FormBuilder, private localSurveyService: LocalSurveyService, private surveyService: SurveyService, private questionService: QuestionService) {
+  constructor(private route:Router, 
+              public formBuilder: FormBuilder, 
+              private localSurveyService: LocalSurveyService, 
+              private surveyService: SurveyService, 
+              private questionService: QuestionService) {
   }
-  
-  submitResponses(form: NgForm) {
+
+  // @HostListener("window:beforeunload", ["$event"]) unloadHandler(event: Event) {
+  //   console.log("Processing beforeunload..."), 
+  //   localStoddrage.setItem("firstName", this.localSurveyService.getFirstName()),
+  //   localStorage.setItem("loadName", this.localSurveyService.getLastName());
+  // } 
+  async submitResponses(form: NgForm) {
     if (form.valid) {
-      //TODO Check for null first/last name, how to fix that?
-      this.pushToServer();
-      console.log("Pushed");
+      await this.surveyService.addSurvey(this.localSurveyService.getSurvey())
+        .then(q => {
+          console.log(q)
+          console.log("Pushed")
+        })
+        .catch(e => alert(e.message)); // Push data to server
       this.route.navigate(['results']);
     }
     else {
@@ -46,13 +55,6 @@ export class SurveyComponent implements OnInit{
     console.log(lName);
   }
 
-  pushToServer() {
-    this.surveyService.addSurvey(this.localSurveyService.getSurvey()).subscribe( {
-      next: (q => console.log(q)),
-      error: (e) => alert(e.message)
-    });
-  }
-
   ngOnInit() {
     this.questionService.getQuestions().subscribe( {
       next: (q: Question[]) => this.questions = q,
@@ -60,10 +62,10 @@ export class SurveyComponent implements OnInit{
       complete: () => console.log("Completed Question Load"),
       });
 
-    this.surveyService.getSurvey("Liam", "Sparling").subscribe( {
-      next: (q => this.tempSurvey = q),
-      error: (e) => alert(e.message)
-    });
+    let firstName: string = localStorage.getItem("firstName") || "";
+    let lastName: string = localStorage.getItem("lastName") || "";
+    this.localSurveyService.updateNames(firstName, lastName);
+    this.printLocalDB();
   }
 
 

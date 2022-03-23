@@ -1,7 +1,5 @@
-import { ThisReceiver } from '@angular/compiler';
 import { Injectable } from '@angular/core';
 import { Survey } from './survey';
-import { SurveyComponent } from './survey/survey.component';
 
 @Injectable({
   providedIn: 'root'

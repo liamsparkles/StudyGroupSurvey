@@ -5,7 +5,7 @@ import { YesNoDialogComponent } from '../Components/Shared/yes-no-dialog/yes-no-
 import { SurveyService } from '../survey.service';
 import { LocalSurveyService } from '../localsurvey.service';
 import { DynamicFormBuildConfig, DynamicFormConfiguration, RxDynamicFormBuilder } from '@rxweb/reactive-dynamic-forms';
-import { SERVER_DATA } from './server_data';
+import { PARM_DATA } from './form_parameter_data';
 import { ReactiveFormConfig } from '@rxweb/reactive-form-validators';
 
 @Component({
@@ -16,7 +16,7 @@ import { ReactiveFormConfig } from '@rxweb/reactive-form-validators';
 })
 export class HomeComponent implements OnInit {
 
-  serverData: any[] = SERVER_DATA;
+  serverData: any[] = PARM_DATA;
 
   dynamicForm !: DynamicFormBuildConfig;
   dynamicFormConfiguration !: DynamicFormConfiguration;
@@ -39,8 +39,10 @@ export class HomeComponent implements OnInit {
       this.firstName = this.dynamicForm.formGroup.value.firstName;
       this.lastName = this.dynamicForm.formGroup.value.lastName;
       await this.surveyService.getSurveyExistance(this.firstName, this.lastName)
-        .then(value => {this.existingname = value
-        console.log("done")})
+        .then(value => {
+          this.existingname = value
+          console.log("done")
+        })
         .catch(error => console.log("Much error"))
     }
     console.log(this.existingname);
@@ -61,23 +63,10 @@ export class HomeComponent implements OnInit {
       })
     }
     else if (this.dynamicForm.formGroup.valid && !this.existingname) {
-      this.localSurveyService.updateNames(this.firstName, this.lastName);
+      localStorage.setItem("firstName", this.firstName);
+      localStorage.setItem("lastName", this.lastName);
       this.route.navigate(['survey']);
     }
-  }
-
-  checkName(firstname: string, lastname: string) {
-    // this.surveyService.getSurveyExistance(firstname, lastname).subscribe( {
-    //   next: (v) => this.existingname = v,
-    //   error: (e) => alert(e.message),
-    //   }
-    // );
-  }
-
-  quickTest() {
-    this.surveyService.getSurveys().subscribe( {
-      error: (e) => alert(e.message)
-    })
   }
 
   ngOnInit(): void {

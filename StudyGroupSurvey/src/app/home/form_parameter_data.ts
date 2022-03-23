@@ -1,4 +1,4 @@
-export const SERVER_DATA = [
+export const PARM_DATA = [
     {
       type: "text",
       name: "firstName",
@@ -14,7 +14,8 @@ export const SERVER_DATA = [
       type: "text",
       name: "lastName",
       validators: {
-        required: true
+        required: true,
+        alpha: { allowWhiteSpace: true }
       },
       ui: {
         label: "Last Name",
