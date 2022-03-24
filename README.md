@@ -30,3 +30,9 @@ cd StudyGroupSurvey/StudyGroupSurvey
 npm install
 ng serve
 ```
+
+## Improvements
+
+Currently the backend is setup to return a 500: Internal Server Error message whenever a query fails because the item is not in the database.
+Although it functions fine, I do not like this functionality. It is uninformative and doesn't share enough about what happened. 
+A better informative response will replace this.
