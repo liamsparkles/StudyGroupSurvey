@@ -1,5 +1,7 @@
 # StudyGroupSurvey
 
+This project was accomplished using Angular, Java with SpringBoot, and Atlas MongoDB. In the code above, StudyGroupSurvey contains the Angular code, and surveymanager contains the java code.
+
 The figure below describes the general layout of the project.
 
 ![MVCDiagram](https://github.com/liamsparkles/StudyGroupSurvey/blob/main/MVCDiagram.png "Model View Controller Diagram")
