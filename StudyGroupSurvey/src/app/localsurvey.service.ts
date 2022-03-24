@@ -13,7 +13,7 @@ export class LocalSurveyService {
     this.survey.setName(firstName, lastName);
   }
 
-  addResult(questionId: number, responseId: number) {
+  addResult(questionId: string, responseId: number) {
     for (let result of this.survey.getResults()) {
       if (result.qId == questionId) {
         result.rId = responseId;  // modify referenced data

@@ -16,6 +16,8 @@ import { SurveyComponent } from './survey/survey.component';
 import { ResultsComponent } from './results/results.component';
 import { RxReactiveFormsModule } from '@rxweb/reactive-form-validators';
 import { RxReactiveDynamicFormsModule } from '@rxweb/reactive-dynamic-forms';
+import { MatInputModule} from '@angular/material/input';
+import { MatDividerModule} from '@angular/material/divider';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { RxReactiveDynamicFormsModule } from '@rxweb/reactive-dynamic-forms';
     MatCardModule,
     BrowserAnimationsModule,
     HttpClientModule,
+    MatInputModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent],

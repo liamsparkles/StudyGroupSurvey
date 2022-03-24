@@ -7,27 +7,23 @@
       <ul>
          <li *ngFor="let question of questions">
             <label class="radio-label-out">{{question.questionText}}</label>
-            <br>
             <div class="radio-div">
-               <ul class="ul-display" *ngFor="let response of question.responses">
-                  <input 
-                     type="radio" 
-                     value="{{response.rText}}" 
-                     name="{{question.questionId}}" 
-                     id="{{question.questionId}}{{response.rId}}" 
-                     (ngModelChange)="submitRadio(question.questionId, response.rId, response.rText)" 
-                     ngModel required>
-                  <label 
-                     class="radio-label" 
-                     for="{{question.questionId}}{{response.rId}}"> 
-                     {{response.rText}} 
-                  </label>
-               </ul>
+               <mat-radio-group
+                  aria-labelledby="radio-group-label"
+                  class="radio-group"
+                  >
+                  <mat-radio-button 
+                  color="primary"
+                  class="radio-button" 
+                  *ngFor="let response of question.responses" 
+                  [value]="response.rText"
+                  (change)="submitRadio(question.questionId, response.rId, response.rText)"
+                  required
+                  >
+                     {{response.rText}}
+                  </mat-radio-button>
+               </mat-radio-group>
             </div>
-            <div *ngIf="isSubmitted && qForm.invalid">
-               <p class="redred">Required: Please select a value</p>
-            </div>
-            <br><br>
          </li>
       </ul>
       <div class="centre-div">

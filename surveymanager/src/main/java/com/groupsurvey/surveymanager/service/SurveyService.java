@@ -33,7 +33,7 @@ public class SurveyService {
                                survey.getEmployee().getFirstName(), survey.getEmployee().getLastName())));
 
         changeSurvey.setResponses(survey.getResponses());
-        surveyRepository.save(survey);
+        surveyRepository.save(changeSurvey);
     }
 
     public List<Survey> getAllSurveys() {
@@ -65,14 +65,14 @@ public class SurveyService {
         int total_questions = myQuestions.size();
         int correct_questions = 0;
         for (SurveyResponse surveyResponse : myResponses) {
-            int surveyQId = surveyResponse.getqId();
+            String surveyQId = surveyResponse.getqId();
             int icount = 0;
-            int questionQId = -1;
-            while (surveyQId != questionQId && icount < myQuestions.size()) {
+            String questionQId = "";
+            while (!surveyQId.equals(questionQId) && icount < myQuestions.size()) {
                 questionQId = myQuestions.get(icount++).getQuestionId();
             }
-            if (surveyQId != questionQId) throw new RuntimeException(
-                    String.format("Cannot find question with question id %d", surveyQId));
+            if (!surveyQId.equals(questionQId)) throw new RuntimeException(
+                    String.format("Cannot find question with question id %s", surveyQId));
             if (myQuestions.get(icount-1).isCorrect(surveyResponse)) correct_questions++;
         }
         return (float) correct_questions / total_questions;

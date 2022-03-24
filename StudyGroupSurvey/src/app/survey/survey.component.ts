@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LocalSurveyService } from '../localsurvey.service';
 import { Question } from '../question';
@@ -39,7 +39,7 @@ export class SurveyComponent implements OnInit{
     }
   }
 
-  submitRadio(qId: number, rId: number, rText: string){
+  submitRadio(qId: string, rId: number, rText: string){
     // Save the response into local storage
     console.log(rText);
     this.localSurveyService.addResult(qId, rId);

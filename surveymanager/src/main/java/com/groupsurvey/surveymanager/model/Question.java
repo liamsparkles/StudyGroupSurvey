@@ -1,34 +1,33 @@
 package com.groupsurvey.surveymanager.model;
 
 import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
+import java.io.Serializable;
+
 @Document
-public class Question {
+public class Question implements Serializable {
     // Stores a question, including the question prompt/text, possible responses, and the true answer
     @Id
-    @Field(name = "_id")
-    private int questionId;
+    private String questionId;
     @Field(name = "text")
-    @Indexed(unique = true)
     private String questionText;
     private QuestionResponse[] responses;
     private int answer;
 
-    public Question(int questionId, String questionText, QuestionResponse[] responses, int answer) {
+    public Question(String questionId, String questionText, QuestionResponse[] responses, int answer) {
         this.questionId = questionId;
         this.questionText = questionText;
         this.responses = responses;
         this.answer = answer;
     }
 
-    public int getQuestionId() {
+    public String getQuestionId() {
         return this.questionId;
     }
 
-    public void setQuestionId(int questionId) {
+    public void setQuestionId(String questionId) {
         this.questionId = questionId;
     }
 
@@ -62,7 +61,8 @@ public class Question {
 
     @Override
     public String toString() {
-        StringBuilder myText = new StringBuilder(this.questionId).append(" ").append(this.questionText);
+        StringBuilder myText = new StringBuilder(this.questionId)
+                .append(" ").append(this.questionText);
         myText.append("\n");
         for (QuestionResponse resp : this.responses) {
             myText.append(resp.toString()).append("\n");

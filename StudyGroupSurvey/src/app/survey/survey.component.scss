@@ -15,7 +15,7 @@ body {
 
 .radio-div {
   text-align: left; 
-  padding-top: 20px;
+  padding-top: 0px;
   padding-left: 40px;
 }
 
@@ -57,11 +57,23 @@ body {
     opacity: 0.75;
     padding-right: 80px;
     transition: 1s;
+    background-color: #becff0;
   }
 
   input[type="radio"] {
-    accent-color: #f4511e;
-    color: #f4511e;
+    accent-color: #0818f8;
+    color: #0744e9;
     width: 20px;
     height: 20px;
+  }
+
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+    align-items: flex-start;
+  }
+  
+  .radio-button {
+    margin: 5px;
   }

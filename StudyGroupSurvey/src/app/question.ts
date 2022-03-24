@@ -1,5 +1,5 @@
 export interface Question {
-    questionId: number;
+    questionId: string;
     questionText: string;
     responses: {rId: number, rText: string}[];
     answer: number;

@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { LocalsurveyService } from './localsurvey.service';
+import { LocalSurveyService } from './localsurvey.service';
 
 describe('LocalsurveyService', () => {
-  let service: LocalsurveyService;
+  let service: LocalSurveyService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(LocalsurveyService);
+    service = TestBed.inject(LocalSurveyService);
   });
 
   it('should be created', () => {

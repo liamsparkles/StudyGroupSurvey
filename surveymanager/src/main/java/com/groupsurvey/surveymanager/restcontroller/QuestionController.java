@@ -38,12 +38,11 @@ public class QuestionController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Question> getQuestionById(@PathVariable String id) {
-        System.out.println(id);
         return ResponseEntity.ok(questionService.getQuestionById(id));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity deleteQuestion(@PathVariable int id) {
+    public ResponseEntity deleteQuestion(@PathVariable String id) {
         questionService.deleteQuestion(id);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }

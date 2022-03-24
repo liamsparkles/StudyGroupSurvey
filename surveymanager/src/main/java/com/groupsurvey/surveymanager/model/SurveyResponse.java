@@ -2,19 +2,19 @@ package com.groupsurvey.surveymanager.model;
 
 public class SurveyResponse {
     // A response for a question
-    private int qId; // id for the question
+    private String qId; // id for the question
     private int rId; // id for the response
 
-    public SurveyResponse(int qId, int rId) {
+    public SurveyResponse(String qId, int rId) {
         this.qId = qId;
         this.rId = rId;
     }
 
-    public int getqId() {
+    public String getqId() {
         return qId;
     }
 
-    public void setqId(int qId) {
+    public void setqId(String qId) {
         this.qId = qId;
     }
 

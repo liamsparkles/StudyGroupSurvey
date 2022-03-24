@@ -22,15 +22,16 @@ public class QuestionService {
 
     public void updateQuestion(Question question) {
         //Find the question, then make the necessary changes
-        Question changeQuestion = questionRepository.findById(Integer.toString(question.getQuestionId()))
+        Question changeQuestion = questionRepository.findById(question.getQuestionId())
                 .orElseThrow(() -> new RuntimeException(
-                        String.format("Cannot Find Question with Id %s", question.getQuestionId())));
+                        String.format("Cannot Find Question with Id %d", question.getQuestionId())));
 
-        changeQuestion.setQuestionId(question.getQuestionId());
         changeQuestion.setQuestionText(question.getQuestionText());
         changeQuestion.setResponses(question.getResponses());
+        changeQuestion.setAnswer(question.getAnswer());
 
-        questionRepository.save(question);
+        System.out.println(changeQuestion);
+        questionRepository.save(changeQuestion);
     }
 
     public List<Question> getAllQuestions() {
@@ -38,12 +39,12 @@ public class QuestionService {
     }
 
     public Question getQuestionById(String id) {
-        return questionRepository.findById(Integer.parseInt(id)).orElseThrow(() -> new RuntimeException(
+        return questionRepository.findById(id).orElseThrow(() -> new RuntimeException(
                 String.format("Cannot find question with the id: %d", id)));
     }
 
-    public void deleteQuestion(int id) {
-        questionRepository.deleteById(Integer.toString(id));
+    public void deleteQuestion(String id) {
+        questionRepository.deleteById(id);
     }
 
 }

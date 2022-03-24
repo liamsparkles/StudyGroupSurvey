@@ -1,11 +1,33 @@
+<div class="centre-div">
+<p> Assess Your Technical Skills!</p>
+</div>
+
 <div class="main">
-    <div class="main-vert">
-        <form [formGroup]="dynamicForm.formGroup">
-            <div viewMode="basic" [rxwebDynamicForm]="dynamicForm" [uiBindings]="uiBindings"></div>
-            <br>
-            <button [disabled]="!dynamicForm.formGroup.valid" type="submit" class="button" style="vertical-align:middle" (click)="startSurvey()">
-                <span> Start Survey</span>
-            </button>
-        </form>
-    </div>
+    <form class="form">
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>First Name</mat-label>
+            <input type="text" matInput [formControl]="firstFormControl" placeholder="Enter your first name">
+            <mat-error *ngIf="firstFormControl.hasError('firstName') && !firstFormControl.hasError('required')">
+                Please enter your first name
+            </mat-error>
+            <mat-error *ngIf="firstFormControl.hasError('required')">
+            First name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+
+        <mat-form-field class="full-width" appearance="fill">
+            <mat-label>Last Name</mat-label>
+            <input type="text" matInput [formControl]="lastFormControl" placeholder="Enter your last name">
+            <mat-error *ngIf="lastFormControl.hasError('lastName') && !lastFormControl.hasError('required')">
+                Please enter your last name
+            </mat-error>
+            <mat-error *ngIf="lastFormControl.hasError('required')">
+            Last name is <strong>required</strong>
+            </mat-error>
+        </mat-form-field>
+    </form>
+
+    <button [disabled]="!lastFormControl.valid || !firstFormControl.valid" type="submit" class="button" style="vertical-align:middle" (click)="startSurvey()">
+        <span> Start Survey</span>
+    </button>
 </div>
