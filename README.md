@@ -24,7 +24,7 @@ Node package manager: 8.5.0
 cd StudyGroupSurvey/surveymanager
 mvn compile
 mvn package
-java -jar target/gs-maven-0.1.0.jar
+java -jar target/surveymanager-0.0.1-SNAPSHOT.jar
 
 cd StudyGroupSurvey/StudyGroupSurvey
 npm install
