@@ -42,7 +42,7 @@ public class SurveyService {
 
     public Survey getSurveyByName(String firstName, String lastName) {
         return surveyRepository.findByName(firstName, lastName).orElseThrow(() -> new RuntimeException(
-                String.format("Cannot find Survey with name %s", firstName, lastName)));
+                String.format("Cannot find Survey with name %s %s", firstName, lastName)));
     }
 
     public boolean getSurveyExistance(String firstName, String lastName) {
