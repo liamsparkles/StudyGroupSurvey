@@ -24,7 +24,7 @@ public class QuestionService {
         //Find the question, then make the necessary changes
         Question changeQuestion = questionRepository.findById(question.getQuestionId())
                 .orElseThrow(() -> new RuntimeException(
-                        String.format("Cannot Find Question with Id %d", question.getQuestionId())));
+                        String.format("Cannot Find Question with Id %s", question.getQuestionId())));
 
         changeQuestion.setQuestionText(question.getQuestionText());
         changeQuestion.setResponses(question.getResponses());

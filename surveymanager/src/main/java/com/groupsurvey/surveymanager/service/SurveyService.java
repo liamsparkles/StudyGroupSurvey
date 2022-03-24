@@ -51,7 +51,9 @@ public class SurveyService {
     }
 
     public void deleteSurvey(String firstName, String lastName) {
-        surveyRepository.deleteByName(firstName, lastName);
+        Survey mySurvey = surveyRepository.findByName(firstName, lastName).orElseThrow(() -> new RuntimeException(
+                String.format("Cannot find Survey with name %s %s", firstName, lastName)));
+        surveyRepository.delete(mySurvey);
     }
 
     public Float checkSurvey(String firstName, String lastName) {
