@@ -17,7 +17,7 @@ Here are some additional details regarding the database structure. The embedded 
 | /api/survey | PUT  | Update survy | OK |
 | /api/survey | GET  | Get all surveys | OK |
 | /api/survey/\<firstName\>/\<lastName\> | GET | Get survey with name | OK |
-| /api/survey/exists/\<firstName\>/\<lastName\> | GET  | Get wether survey with name exists | OK|
+| /api/survey/exists/\<firstName\>/\<lastName\> | GET  | Get whether survey with name exists | OK|
 | /api/survey/results/\<firstName\>/\<lastName\> | GET  | Get survey results as float | OK |
 | /api/survey/\<firstName\>/\<lastName\> | DELETE  | Delete survey with name | NO_CONTENT |
 | /api/question | POST | Add question | CREATED |
