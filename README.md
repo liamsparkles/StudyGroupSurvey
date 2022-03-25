@@ -11,6 +11,21 @@ Here are some additional details regarding the database structure. The embedded 
 ![MongoDBDiagram](https://github.com/liamsparkles/StudyGroupSurvey/blob/main/StudyGroupSurveyDBDiagram.png "MongoDB Diagram")
 
 
+| API Route | Request/Method | Functionality | Status Text |
+| --------- | --------- | --------- | --------- |
+| /api/survey | POST | Add survey | CREATED |
+| /api/survey | PUT  | Update survy | OK |
+| /api/survey | GET  | Get all surveys | OK |
+| /api/survey/\<firstName\>/\<lastName\> | GET | Get survey with name | OK |
+| /api/survey/exists/\<firstName\>/\<lastName\> | GET  | Get wether survey with name exists | OK|
+| /api/survey/results/\<firstName\>/\<lastName\> | GET  | Get survey results as float | OK |
+| /api/survey/\<firstName\>/\<lastName\> | DELETE  | Delete survey with name | NO_CONTENT |
+| /api/question | POST | Add question | CREATED |
+| /api/question | PUT | Update question | OK |
+| /api/question | GET | Get all questions | OK |
+| /api/question/\<id\> | GET | Get question with id| OK |
+| /api/question/\<id\> | DELETE | Delete question with id | NO_CONTENT |
+
 ## Setup and Execution
 
 mvn version: 3.8.5   
@@ -35,4 +50,4 @@ ng serve
 
 Currently the backend is setup to return a 500: Internal Server Error message whenever a query fails because the item is not in the database.
 Although it functions fine, I do not like this functionality. It is uninformative and doesn't share enough about what happened. 
-A better informative response will replace this.
+A better informative response will replace this, such as a 404.
