@@ -50,4 +50,6 @@ ng serve
 
 Currently the backend is setup to return a 500: Internal Server Error message whenever a query fails because the item is not in the database.
 Although it functions fine, I do not like this functionality. It is uninformative and doesn't share enough about what happened. 
-A better informative response will replace this, such as a 404.
+A better informative response will replace this, for example a 404.
+
+Update submission buttons to activate on 'enter' keypress.
