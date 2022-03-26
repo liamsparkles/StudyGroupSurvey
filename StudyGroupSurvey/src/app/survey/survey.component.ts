@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, NgForm } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, NgForm, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { LocalSurveyService } from '../localsurvey.service';
 import { Question } from '../question';
@@ -12,7 +12,9 @@ import { SurveyService } from '../survey.service';
   styleUrls: ['./survey.component.scss'],
 })
 export class SurveyComponent implements OnInit{
-  isSubmitted = false;
+  isValid: boolean = false;
+  numButtons: number = 0;
+  questionIds: {qId: string, valid: boolean}[] = [];
   public questions: Question[] = [];
 
   productFormGroup!: FormGroup;
@@ -22,6 +24,7 @@ export class SurveyComponent implements OnInit{
               private surveyService: SurveyService, 
               private questionService: QuestionService) {
   }
+  questionForm = this.formBuilder.group({})
 
   async submitResponses(form: NgForm) {
     // Save the survey response from the user
@@ -41,8 +44,15 @@ export class SurveyComponent implements OnInit{
 
   submitRadio(qId: string, rId: number, rText: string){
     // Save the response into local storage
-    console.log(rText);
     this.localSurveyService.addResult(qId, rId);
+  
+    for (let questionId of this.questionIds) {
+      if (qId == questionId.qId && questionId.valid == false) {
+        this.numButtons += 1;
+        break;
+      }
+    }
+    if (this.numButtons >= this.questions.length) { this.isValid = true; }
   }
 
   ngOnInit() {
@@ -50,8 +60,11 @@ export class SurveyComponent implements OnInit{
     this.questionService.getQuestions().subscribe( {
       next: (q: Question[]) => this.questions = q,
       error: (e) => alert(e.message),
-      complete: () => console.log("Completed Question Load"),
-      });
+      complete: () => {console.log("Completed Question Load")
+      for (let qId of this.questions) { 
+        this.questionIds.push({qId: qId.questionId, valid: false})
+      }
+      }});
 
     // Load names (our ids) and save them into our local service in case we reloaded the page.
     let firstName: string = localStorage.getItem("firstName") || "";

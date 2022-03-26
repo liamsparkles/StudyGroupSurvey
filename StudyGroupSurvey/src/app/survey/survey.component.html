@@ -3,7 +3,7 @@
 </div>
 
 <div class="main">
-   <form #qForm="ngForm" (ngSubmit)="submitResponses(qForm)">
+   <form #questionForm="ngForm" (ngSubmit)="submitResponses(questionForm)">
       <ul>
          <li *ngFor="let question of questions">
             <label class="radio-label-out">{{question.questionText}}</label>
@@ -11,14 +11,13 @@
                <mat-radio-group
                   aria-labelledby="radio-group-label"
                   class="radio-group"
-                  >
+               >
                   <mat-radio-button 
                   color="primary"
                   class="radio-button" 
                   *ngFor="let response of question.responses" 
                   [value]="response.rText"
                   (change)="submitRadio(question.questionId, response.rId, response.rText)"
-                  required
                   >
                      {{response.rText}}
                   </mat-radio-button>
@@ -27,7 +26,7 @@
          </li>
       </ul>
       <div class="centre-div">
-         <input [disabled]="qForm.invalid" type="submit" class="button button-submit" value="Submit Form">
+         <input [disabled]="!isValid" type="submit" class="button button-submit" value="Submit Form">
       </div>
    </form>
 </div>
