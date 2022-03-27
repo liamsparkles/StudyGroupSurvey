@@ -58,4 +58,8 @@ Add an additional parameter to the form to support people with the same name. Th
 
 Add management for the questions for administrators that don't understand the backend. This would allow them to add and modify questions using the front-end.
 
-Modify DB design to remove the answer field from being directly included with the question. With this modified design, the front-end would never get access to the answers.
+Modify DB design to remove the answer field from being directly included with the question. With this modified design, the front-end would never get access to the answers. By preventing users from getting access to the answers, they couldn't cheat by using postman and knowing the HTTP calls.
+
+Adding to security, being able to make direct calls to the controller through REST is already a security risk, as any user can access the Question and/or Survey database. Allowing them to possibly cheat or gain additional time should we add a timer to the application. This can be solved by adding an API-key or some other security measure. Additional research would need to be done to figure out the best method, in addition to making sure no MITM attacks could steal the key. 
+We also need to switch to HTTPS instead of HTTP.
+
