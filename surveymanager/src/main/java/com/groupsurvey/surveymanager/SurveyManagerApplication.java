@@ -106,7 +106,7 @@ public class SurveyManagerApplication implements CommandLineRunner {
 
 	public void run(String... args) {
 		System.out.println("Starting CMD");
-		create1Question();
+//		create1Question();
 //		create1Survey();
 		System.out.println("Ending CMD");
 	}

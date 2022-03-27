@@ -5,7 +5,6 @@ import { YesNoDialogComponent } from '../Components/Shared/yes-no-dialog/yes-no-
 import { SurveyService } from '../survey.service';
 import { LocalSurveyService } from '../localsurvey.service';
 import { DynamicFormBuildConfig, DynamicFormConfiguration, RxDynamicFormBuilder } from '@rxweb/reactive-dynamic-forms';
-import { ReactiveFormConfig } from '@rxweb/reactive-form-validators';
 import { FormControl, Validators } from '@angular/forms';
 
 @Component({

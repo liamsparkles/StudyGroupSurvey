@@ -49,6 +49,7 @@ export class SurveyComponent implements OnInit{
     for (let questionId of this.questionIds) {
       if (qId == questionId.qId && questionId.valid == false) {
         this.numButtons += 1;
+        questionId.valid = true;
         break;
       }
     }
