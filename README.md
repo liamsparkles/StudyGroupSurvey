@@ -53,3 +53,9 @@ Although it functions fine, I do not like this functionality. It is uninformativ
 A better informative response will replace this, for example a 404.
 
 Update submission buttons to activate on 'enter' keypress.
+
+Add an additional parameter to the form to support people with the same name. This could either be an email field, or an user number.
+
+Add management for the questions for administrators that don't understand the backend. This would allow them to add and modify questions using the front-end.
+
+Modify DB design to remove the answer field from being directly included with the question. With this modified design, the front-end would never get access to the answers.
